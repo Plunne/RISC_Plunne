@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 01/18/2026 04:13:16 PM
+-- Create Date: 01/14/2026 06:17:38 PM
 -- Design Name: 
--- Module Name: tb_helpers_pkg - arch_tb_helpers_pkg
+-- Module Name: tb_common_pkg - arch_tb_common_pkg
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,22 +31,23 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-package tb_helpers_pkg is
+package tb_common is
+    
+    -- Libriscp_Common
+    constant TB_XLEN : integer := 32;
+    constant TB_XLENM1 : integer := TB_XLEN -1;
+    constant TB_X32_NULL : std_logic_vector(TB_XLENM1 downto 0) := X"00000000";
+    constant TB_BIT_TRUE   : std_logic := '1';
+    constant TB_BIT_FALSE  : std_logic := '0';
+    constant TB_X32_TRUE   : std_logic_vector(TB_XLENM1 downto 0) := X"00000001";
+    constant TB_X32_FALSE  : std_logic_vector(TB_XLENM1 downto 0) := X"00000000";
+    
+    -- Common types
+    subtype tbt_Bit is std_logic;
+    subtype tbt_Word is std_logic_vector(TB_XLENM1 downto 0);
+    
+end package tb_common;
 
-    -- Time related
-    constant CLK_PERIOD : time := 10ns;
-    procedure tick(signal clk : inout std_logic);
-
-end package tb_helpers_pkg;
-
-package body tb_helpers_pkg is
-
-    procedure tick(signal clk : inout std_logic) is
-    begin
-        clk <= '0';
-        wait for CLK_PERIOD/2;
-        clk <= '1';
-        wait for CLK_PERIOD/2;
-    end procedure tick;
-
+package body tb_common is
 end package body;
+

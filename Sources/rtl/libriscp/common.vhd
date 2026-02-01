@@ -64,6 +64,26 @@ constant BIT_FALSE  : t_Bit := '0';
 constant X32_TRUE   : t_Word := X"00000001";
 constant X32_FALSE  : t_Word := X"00000000";
 
+----------------
+-- COMPONENTS --
+----------------
+
+-- PC
+constant PC_INCR : t_Word := X"00000004";
+
+constant PCSEL_SIZE     : integer := 3;
+constant PCSEL_SIZEM1   : integer := PCSEL_SIZE -1;
+subtype t_PCSel is std_logic_vector(PCSEL_SIZEM1 downto 0);
+
+constant PCSEL_INCR_Bit : integer := 0;
+constant PCSEL_SP_Bit   : integer := 1;
+constant PCSEL_RST_Bit  : integer := 2;
+
+constant PCSEL_HOLD : t_PCSel := B"000";
+constant PCSEL_INCR : t_PCSel := B"001";
+constant PCSEL_SP   : t_PCSel := B"010";
+constant PCSEL_RST  : t_PCSel := B"100";
+
 end package common;
 
 package body common is

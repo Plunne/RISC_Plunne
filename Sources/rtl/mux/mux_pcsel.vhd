@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 01/18/2026 04:13:16 PM
+-- Create Date: 02/01/2026 10:36:04 AM
 -- Design Name: 
--- Module Name: tb_helpers_pkg - arch_tb_helpers_pkg
+-- Module Name: MUX_PCSel - arch_MUX_PCSel
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,26 +31,24 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-package tb_helpers is
+library libriscp;
+use libriscp.common.all;
+
+entity MUX_PCSel is
+    Port (
+        RST     : in t_Bit;
+        INCR    : in t_Bit;
+        SP_EN   : in t_Bit;
+        PCSel   : out t_PCSel
+    );
+end MUX_PCSel;
+
+architecture arch_MUX_PCSel of MUX_PCSel is
     
-    -- Test Related
-    constant STEP_TIME  : time := 10ns;
-    constant END_TEST   : time := 50ns;
-    
-    -- Time related
-    constant CLK_PERIOD : time := 10ns;
-    procedure tick(signal clk : inout std_logic);
+begin
 
-end package tb_helpers;
+    PCSel(PCSEL_RST_Bit)    <= RST;                             -- Prio 1 : RST over all
+    PCSel(PCSEL_SP_Bit)     <= SP_EN and not RST;               -- Prio 2 : SET over INCR
+    PCSel(PCSEL_INCR_Bit)   <= INCR and not (RST or SP_EN);     -- Prio 3 : INCR lowest
 
-package body tb_helpers is
-
-    procedure tick(signal clk : inout std_logic) is
-    begin
-        clk <= '0';
-        wait for CLK_PERIOD/2;
-        clk <= '1';
-        wait for CLK_PERIOD/2;
-    end procedure tick;
-
-end package body;
+end arch_MUX_PCSel;

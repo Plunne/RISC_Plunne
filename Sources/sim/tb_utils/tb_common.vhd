@@ -46,6 +46,20 @@ package tb_common is
     subtype tbt_Bit is std_logic;
     subtype tbt_Word is std_logic_vector(TB_XLENM1 downto 0);
     
+    -- PC
+    constant TB_PC_INCR : tbt_Word := X"00000004";
+    constant TB_PCSEL_SIZE     : integer := 3;
+    constant TB_PCSEL_SIZEM1   : integer := TB_PCSEL_SIZE -1;
+    subtype tbt_PCSel is std_logic_vector(TB_PCSEL_SIZEM1 downto 0);
+    constant TB_PCSEL_INCR_Bit : integer := 0;
+    constant TB_PCSEL_SP_Bit   : integer := 1;
+    constant TB_PCSEL_RST_Bit  : integer := 2;
+    constant TB_PCSEL_HOLD : tbt_PCSel := B"000";
+    constant TB_PCSEL_INCR : tbt_PCSel := B"001";
+    constant TB_PCSEL_SP   : tbt_PCSel := B"010";
+    constant TB_PCSEL_RST  : tbt_PCSel := B"100";
+
+    
 end package tb_common;
 
 package body tb_common is

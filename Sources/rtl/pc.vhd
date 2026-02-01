@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
+library libriscp;
 use libriscp.common.all;
 
 entity PC is
@@ -41,17 +41,11 @@ entity PC is
         INCR    : in t_Bit;
         SP_EN   : in t_Bit;
         SP_ADDR : in t_Word;
-        PC      : out t_Word;
+        PC      : out t_Word
     );
 end PC;
 
 architecture arch_PC of PC is
-
-    ---------------
-    -- CONSTANTS --
-    ---------------
-    
-    constant PC_INCR : t_Word := X"00000004";
 
 begin
 

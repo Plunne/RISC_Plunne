@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 01/18/2026 04:13:16 PM
+-- Create Date: 02/01/2026 10:36:04 AM
 -- Design Name: 
--- Module Name: tb_helpers_pkg - arch_tb_helpers_pkg
+-- Module Name: MUX_OpSel - arch_MUX_OpSel
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,26 +31,16 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-package tb_helpers is
-    
-    -- Test Related
-    constant STEP_TIME  : time := 10ns;
-    constant END_TEST   : time := 50ns;
-    
-    -- Time related
-    constant CLK_PERIOD : time := 10ns;
-    procedure tick(signal clk : inout std_logic);
+library libriscp;
+use libriscp.common.all;
 
-end package tb_helpers;
+entity MUX_OpSel is
+--  Port ( );
+end MUX_OpSel;
 
-package body tb_helpers is
+architecture arch_MUX_OpSel of MUX_OpSel is
 
-    procedure tick(signal clk : inout std_logic) is
-    begin
-        clk <= '0';
-        wait for CLK_PERIOD/2;
-        clk <= '1';
-        wait for CLK_PERIOD/2;
-    end procedure tick;
+begin
 
-end package body;
+
+end arch_MUX_OpSel;

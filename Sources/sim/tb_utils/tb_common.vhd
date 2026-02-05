@@ -63,5 +63,5 @@ package tb_common is
 end package tb_common;
 
 package body tb_common is
-end package body;
+end package body tb_common;
 
